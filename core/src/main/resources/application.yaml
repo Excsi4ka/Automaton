@@ -1,3 +1,38 @@
 spring:
   application:
     name: core
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+  flyway:
+    enabled: true
+
+core:
+
+  security:
+    issuer: ${CORE_ISSUER:http://localhost:8080}
+    audience: core
+    user:
+      email: ${INITIAL_USER_EMAIL}
+      password: ${INITIAL_USER_PASSWORD}
+    service-client:
+      client-id: ${CORE_CLIENT_ID:core-service}
+      client-secret: ${CORE_CLIENT_SECRET}
+      audience: orchestrator
+
+  orchestrator:
+    # A url to an orchestrator service or its load balancer
+    url: ${ORCHESTRATOR_URL}
+
+  jwt:
+    # Single-line Base64 DER values, without PEM headers or footers.
+    public-key: ${JWT_PUBLIC_KEY}
+    private-key: ${JWT_PRIVATE_KEY}
+    key-id: ${JWT_KEY_ID:core-key-1}
