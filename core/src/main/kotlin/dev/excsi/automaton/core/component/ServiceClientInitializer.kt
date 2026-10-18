@@ -29,10 +29,13 @@ class ServiceClientInitializer(
             return
         }
 
+        val clientSecretHash = passwordEncoder.encode(serviceClient.clientSecret)
+            ?: throw IllegalStateException("Failed to encode service client secret")
+
         val registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
             .clientId(serviceClient.clientId)
             .clientName("Core service")
-            .clientSecret(passwordEncoder.encode(serviceClient.clientSecret))
+            .clientSecret(clientSecretHash)
             .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
             .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
             .scope("tasks:submit")

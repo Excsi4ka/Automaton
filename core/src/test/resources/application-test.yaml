@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: ${TEST_DB_URL:jdbc:postgresql://localhost:5432/core_test}
+    username: ${TEST_DB_USER:core_test}
+    password: ${TEST_DB_PASSWORD:core_test}
+
+core:
+  security:
+    issuer: http://localhost:8080
+    audience: core
+    user:
+      email: test@example.invalid
+      password: core-test-password
+    service-client:
+      client-id: core-test-client
+      client-secret: core-test-client-secret
+      audience: orchestrator
+
+  orchestrator:
+    url: http://localhost:9999
+
+  jwt:
+    # Fixed RSA pair for tests only.
+    public-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwd7NnReUki1Z4bj8c7U2RzGSDMuIIMc53jwBLNdAhuOTt342T348pX4YKlYd7jincRg2shMPZxpVL0/+sY2Yg58sjHEajqynHGHJYxaQ3h+5Q5wqI7zlHWbGm2edrLHd9VM75Oit7mK3uJ4OixQQKCSVDVbkGbHXFCD/hJmiQY+0GcWLWGcqq0psM/wATFt6pe7kGZbz2glaOkcYh/2vCg4Vvlh0Al+XVjvtwpAgh58LchpLcEspoLMFjjNXwshPy24SHHxhpuC5noWfMANLpiN/Ag3C21drk/02Fp/C8ZqmzDw2mTtpik26XqpZs4Z86zbjvK0f+ov6uXCVw7wOXwIDAQAB
+    private-key: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDB3s2dF5SSLVnhuPxztTZHMZIMy4ggxznePAEs10CG45O3fjZPfjylfhgqVh3uOKdxGDayEw9nGlUvT/6xjZiDnyyMcRqOrKccYcljFpDeH7lDnCojvOUdZsabZ52ssd31Uzvk6K3uYre4ng6LFBAoJJUNVuQZsdcUIP+EmaJBj7QZxYtYZyqrSmwz/ABMW3ql7uQZlvPaCVo6RxiH/a8KDhW+WHQCX5dWO+3CkCCHnwtyGktwSymgswWOM1fCyE/LbhIcfGGm4LmehZ8wA0umI38CDcLbV2uT/TYWn8LxmqbMPDaZO2mKTbpeqlmzhnzrNuO8rR/6i/q5cJXDvA5fAgMBAAECggEAOSq23LTAVZ5T27CNmJz9xV6Dn4xAttGoabSt8AgE+gGPZFMuNqCVx4L4IzvDlaRVE489SaM/LnrgVZQ0GS0UpPNB0qPjXeDhYggftz1HOIiIO7yH3IPt146fz+Fs6CiGt7l0dtp5t0qavDC3PyGKZhvra8SMfFspfcEBN5uJ8eSnNZ4LN+D30n97156DvUz/eEEefoslK7nYvhMMPPAPRGtH9kjORvc9XWzrMiwQYfnlCWOMIBf3OzOdNNswEfaVYUVm3z/4PrLdPtUHbh7a0dD4OYDmMtmpwyPdgGfeq9fIL6tzr0HvxYl5Ny73CZk5BeLM69v6NlgmnVxusUrQYQKBgQDx3dk/APbM8bWNZvtbq5J4XX5ciX6zpD4mbADp68bVBy5Ye43UQIJgTtIB48eIjhKNbLqSPay3NKiT1n7fJG808aOEGRGinu01OsdNt9QP1DKxZlB59flKYOCaQ3ZB6zmxzZ7dAgTGZ+hq37EBii23u5oA6VFlnypWnTp5Wgby7wKBgQDNMvbzd8XJjNDISulPaXgE7dW9mirTt9p7uaoZyTXvUceVtfpfU5ND7D1+4p8tB8/u2x8H9Ni3c01gWCzLotSGAiUOlLn1Dpzyuojjpiy0SyC3o28vEUU3kDecatmA+cm6VJs2ZaJ0dWYVByNw0fPHiuM7CuDSDT7J2408g6bbkQKBgQDsUdlMiAKc6KZ9jNuYDCHG3YLzo5xapeXb4Ldb1/Wke6m65q4Dbyx0MU9cbVSuhjJ2YIBDF2PEdf0oxfGc0Zqe3mLoVR44CJS457+Ink7jUHBfiRqkr8Nt+w45bCUF73Gl2sSYKLrFqQ0cL4hhesOEvBaTQWU4p7XUfzd9DouvnQKBgAtfN7Bmgt+Ynjl7bVKpVa1wQNgxIw54sfMJZxPmwsZwkc8KNsXxq8en4ACYLpogRLXIDwAx4ZDJIxCj0le2vnBuzf7w3x1loe0RyWRUYUXcpAOJWzAQlPVvWKWihktPjI53AeMR3t71YqLnsl8eQ5Rbbhxnje4WLdSiBkHESgsBAoGBAL80c0O+kzEVj86ve2kI4iErYYT0d5O/bwDyNOvNimdyULZgDo4RMWUoJMyI5IZtYj7NIqkCIIcLQl3pc/MG9tK5fgC/RHSd1Qv5a0wSyjfhEmTCREEya5zIbl0dCFo1BiZ4Sm6CMGWilUSds006vIMS1ai+fo7qhImcNEExy+dr
+    key-id: core-test-key

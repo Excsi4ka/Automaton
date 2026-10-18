@@ -24,9 +24,12 @@ class UserInitializer(
             return
         }
 
+        val passwordHash = passwordEncoder.encode(initialUser.password)
+            ?: throw IllegalStateException("Failed to encode initial user password")
+
         userRepository.save(User(
             email = initialUser.email,
-            passwordHash = passwordEncoder.encode(initialUser.password)
+            passwordHash = passwordHash
         ))
     }
 }
