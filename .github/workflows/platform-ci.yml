@@ -22,28 +22,28 @@ jobs:
       fail-fast: false
       matrix:
         # Add future JVM services here and in the publish matrix below.
-        service: [core]
+        service: [core, orchestrator]
 
     services:
       postgres:
         image: postgres:18.4
         env:
-          POSTGRES_DB: core_test
-          POSTGRES_USER: core_test
-          POSTGRES_PASSWORD: core_test
+          POSTGRES_DB: ${{ matrix.service }}_test
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
         ports:
           - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U core_test -d core_test"
+          --health-cmd "pg_isready -U test -d ${{ matrix.service }}_test"
           --health-interval 5s
           --health-timeout 5s
           --health-retries 12
 
     env:
       SERVICE: ${{ matrix.service }}
-      TEST_DB_URL: jdbc:postgresql://localhost:5432/core_test
-      TEST_DB_USER: core_test
-      TEST_DB_PASSWORD: core_test
+      TEST_DB_URL: jdbc:postgresql://localhost:5432/${{ matrix.service }}_test
+      TEST_DB_USER: test
+      TEST_DB_PASSWORD: test
 
     steps:
       - name: Check out repository
@@ -124,7 +124,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        service: [core]
+        service: [core, orchestrator]
     env:
       SERVICE: ${{ matrix.service }}
 

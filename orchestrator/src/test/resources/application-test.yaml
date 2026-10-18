@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: ${TEST_DB_URL:jdbc:postgresql://localhost:5432/orchestrator_test}
+    username: ${TEST_DB_USER:test}
+    password: ${TEST_DB_PASSWORD:test}
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+  flyway:
+    enabled: true
