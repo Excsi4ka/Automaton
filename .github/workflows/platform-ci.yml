@@ -96,9 +96,25 @@ jobs:
           retention-days: 1
           if-no-files-found: error
 
+  verify-platform:
+    name: Verify platform
+    needs: verify
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Require all service verifications to succeed
+        env:
+          VERIFICATION_RESULT: ${{ needs.verify.result }}
+        run: |
+          if [ "$VERIFICATION_RESULT" != "success" ]; then
+            echo "::error::Service verification ended with ${VERIFICATION_RESULT}"
+            exit 1
+          fi
+
   publish:
     name: Publish ${{ matrix.service }}
-    needs: verify
+    needs: verify-platform
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 15
