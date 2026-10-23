@@ -7,10 +7,9 @@ import java.util.UUID
 
 @Entity
 @Table(name = "nodes")
-class WorkNode {
+class WorkNode(
 
     @field:Id
     var id: UUID = UUID.randomUUID()
 
-
-}
+)

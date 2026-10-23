@@ -1,0 +1,17 @@
+CREATE TABLE executions (
+    id UUID PRIMARY KEY
+);
+
+CREATE TABLE jobs (
+    id UUID PRIMARY KEY
+);
+
+CREATE TABLE nodes (
+    id UUID PRIMARY KEY
+);
+
+CREATE TABLE workflows (
+    id UUID PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL
+);

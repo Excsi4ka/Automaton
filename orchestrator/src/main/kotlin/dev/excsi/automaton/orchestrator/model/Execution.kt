@@ -7,8 +7,12 @@ import java.util.UUID
 
 @Entity
 @Table(name = "executions")
-class Execution {
+class Execution(
 
     @field:Id
     var id: UUID = UUID.randomUUID()
+
+) {
+
+
 }

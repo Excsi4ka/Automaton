@@ -7,8 +7,8 @@ import java.util.UUID
 
 @Entity
 @Table(name = "jobs")
-class Job {
+class Job(
 
     @field:Id
     var id: UUID = UUID.randomUUID()
-}
+)
