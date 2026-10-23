@@ -17,9 +17,11 @@ class User(
     @field:Column(name = "email", unique = true, nullable = false)
     var email: String,
 
+    // Legacy data retained for schema compatibility; authentication is handled by Keycloak.
     @field:Column(name = "password_hash", nullable = false)
     var passwordHash: String,
 
     @field:Column(name = "created_at", nullable = false)
     var createdAt: Instant = Instant.now()
+
 )

@@ -14,25 +14,26 @@ spring:
   flyway:
     enabled: true
 
-core:
-
   security:
-    issuer: ${CORE_ISSUER:http://localhost:8080}
-    audience: core
-    user:
-      email: ${INITIAL_USER_EMAIL}
-      password: ${INITIAL_USER_PASSWORD}
-    service-client:
-      client-id: ${CORE_CLIENT_ID:core-service}
-      client-secret: ${CORE_CLIENT_SECRET}
-      audience: orchestrator
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_ISSUER_URI}
+          audiences: ${KEYCLOAK_AUDIENCE:core}
+      client:
+        registration:
+          core-service:
+            provider: keycloak
+            client-id: ${KEYCLOAK_CLIENT_ID:core-service}
+            client-secret: ${KEYCLOAK_CLIENT_SECRET}
+            client-authentication-method: client_secret_basic
+            authorization-grant-type: client_credentials
+            scope: ${KEYCLOAK_CLIENT_SCOPES:tasks:submit,tasks:read}
+        provider:
+          keycloak:
+            token-uri: ${KEYCLOAK_ISSUER_URI}/protocol/openid-connect/token
 
+core:
   orchestrator:
     # A url to an orchestrator service or its load balancer
     url: ${ORCHESTRATOR_URL}
-
-  jwt:
-    # Single-line Base64 DER values, without PEM headers or footers.
-    public-key: ${JWT_PUBLIC_KEY}
-    private-key: ${JWT_PRIVATE_KEY}
-    key-id: ${JWT_KEY_ID:core-key-1}
